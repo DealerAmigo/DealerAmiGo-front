@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DealerAmigo - Automatiza. Atrae. Vende.</title>
+    <title>DealerAmigo - Automatiza • Atrae • Vende</title>
     <style>
         * {
             margin: 0;
@@ -12,754 +12,580 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            from { transform: translateX(0) translateY(0); }
+            to { transform: translateX(-100px) translateY(-100px); }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 2.5rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            color: #666;
-            margin-left: 20px;
+        .hero-content p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            margin-bottom: 30px;
+            opacity: 0.95;
         }
 
         .cta-button {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
             display: inline-block;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4); }
+            50% { box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6); }
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.6);
         }
 
-        .hero {
+        .pain-points {
+            background: #1a1a2e;
+            color: white;
             padding: 80px 0;
             text-align: center;
-            color: white;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        .pain-points h2 {
+            font-size: 2.5rem;
+            color: #ff6b35;
+            margin-bottom: 50px;
         }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
-        .value-props {
-            background: white;
-            padding: 80px 0;
-            margin: 0;
-        }
-
-        .value-prop {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        .pain-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
             border-radius: 15px;
+            border-left: 4px solid #ff6b35;
+            backdrop-filter: blur(10px);
             transition: transform 0.3s ease;
         }
 
-        .value-prop:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .pain-card:hover {
+            transform: translateY(-5px);
         }
 
-        .value-prop .icon {
-            font-size: 2rem;
-            margin-right: 20px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .value-prop h3 {
+        .pain-card h3 {
             font-size: 1.3rem;
-            color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
+            color: #ff6b35;
         }
 
-        .value-prop p {
+        .solution {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 80px 0;
+        }
+
+        .solution h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .solution-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-bottom: 50px;
             color: #666;
         }
 
-        .packages {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 80px 0;
-            color: white;
-        }
-
-        .packages h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .packages-grid {
+        .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
-        .package-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
+        .feature-card {
+            background: white;
             padding: 40px;
-            color: #333;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             text-align: center;
-            transition: transform 0.3s ease;
             position: relative;
             overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
-        .package-card::before {
+        .feature-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
         }
 
-        .package-card:hover {
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
-        .package-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .package-subtitle {
-            color: #666;
+        .feature-icon {
+            font-size: 3rem;
             margin-bottom: 20px;
+            display: block;
         }
 
-        .package-price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #667eea;
-            margin-bottom: 30px;
-        }
-
-        .package-features {
-            text-align: left;
-            margin-bottom: 30px;
-        }
-
-        .package-features li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .package-features li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #28a745;
-            font-weight: bold;
-        }
-
-        .addons {
-            background: white;
-            padding: 80px 0;
-        }
-
-        .addons h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 40px;
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
             color: #333;
         }
 
-        .addon-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .addon-item:hover {
-            transform: scale(1.02);
-        }
-
-        .addon-price {
-            font-weight: bold;
-            color: #667eea;
-            font-size: 1.2rem;
-        }
-
-        .notes {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 60px 0;
+        .demo-section {
+            background: #667eea;
+            padding: 80px 0;
             color: white;
             text-align: center;
         }
 
-        .notes h3 {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
+        .chat-demo {
+            max-width: 400px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
         }
 
-        .notes ul {
-            text-align: left;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .notes li {
-            margin-bottom: 15px;
-            padding-left: 20px;
+        .chat-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 20px;
+            text-align: center;
             position: relative;
         }
 
-        .notes li::before {
-            content: "•";
+        .chat-header::after {
+            content: '●';
             position: absolute;
-            left: 0;
-            color: #ffd700;
+            top: 20px;
+            right: 20px;
+            color: #4CAF50;
+            background: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            animation: blink 2s infinite;
         }
 
-        footer {
-            background: #333;
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .bot-msg {
+            justify-content: flex-start;
+        }
+
+        .user-msg {
+            justify-content: flex-end;
+        }
+
+        .msg-bubble {
+            max-width: 80%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+        }
+
+        .bot-msg .msg-bubble {
+            background: white;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .user-msg .msg-bubble {
+            background: #667eea;
+            color: white;
+        }
+
+        .demo-btn {
+            background: #ff6b35;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .pricing {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card.featured {
+            border-color: #ff6b35;
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .plan-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 20px;
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .plan-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan-features li::before {
+            content: '✓';
+            color: #4CAF50;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #1a1a2e;
             color: white;
             padding: 40px 0;
             text-align: center;
         }
 
-        .footer-cta {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-        }
-
         @media (max-width: 768px) {
-            .hero h1 {
+            .hero-content h1 {
                 font-size: 2.5rem;
             }
             
-            .packages-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 20px;
-            }
-            
-            .logo {
+            .pain-points h2,
+            .solution h2,
+            .pricing h2 {
                 font-size: 2rem;
             }
-        }
-
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            text-decoration: none;
-            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
-            animation: pulse 2s infinite;
-            z-index: 1000;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .cta {
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-            padding: 60px 0;
-            color: white;
-            text-align: center;
-        }
-
-        .text-3xl {
-            font-size: 1.875rem;
-            line-height: 2.25rem;
-        }
-
-        .font-bold {
-            font-weight: 700;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-white {
-            color: #fff;
-        }
-
-        .mb-6 {
-            margin-bottom: 1.5rem;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .justify-center {
-            justify-content: center;
-        }
-
-        .space-x-4 > * + * {
-            margin-left: 1rem;
-        }
-
-        .py-3 {
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-        }
-
-        .px-6 {
-            padding-left: 1.5rem;
-            padding-right: 1.5rem;
-        }
-
-        .rounded-2xl {
-            border-radius: 1rem;
-        }
-
-        .shadow-lg {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        .transition {
-            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 150ms;
-        }
-
-        .bg-white {
-            background-color: #fff;
-        }
-
-        .text-violet-800 {
-            color: #5b21b6;
-        }
-
-        .hover\:bg-violet-100:hover {
-            background-color: #ede9fe;
-        }
-
-        .bg-violet-600 {
-            background-color: #7c3aed;
-        }
-
-        .hover\:bg-violet-700:hover {
-            background-color: #6d28d9;
-        }
-
-        /* DealerAmigo Chat Widget */
-        #dealeramigo-widget {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            z-index: 9999;
-            font-family: Arial, sans-serif;
-        }
-        #dealeramigo-button {
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #333;
-            padding: 20px 24px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
-            font-weight: bold;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            animation: floatAround 4s ease-in-out infinite;
-            position: relative;
-        }
-        #dealeramigo-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.8);
-        }
-        #dealeramigo-button::before {
-            content: '💬';
-            margin-right: 8px;
-            font-size: 18px;
-        }
-        
-        @keyframes floatAround {
-            0% { 
-                transform: translateY(0px) translateX(0px) rotate(0deg);
+            
+            .pricing-card.featured {
+                transform: none;
             }
-            25% { 
-                transform: translateY(-15px) translateX(10px) rotate(2deg);
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-5px);
             }
-            50% { 
-                transform: translateY(-8px) translateX(-8px) rotate(-1deg);
-            }
-            75% { 
-                transform: translateY(-20px) translateX(5px) rotate(1deg);
-            }
-            100% { 
-                transform: translateY(0px) translateX(0px) rotate(0deg);
-            }
-        }
-        #dealeramigo-chat {
-            display: none;
-            flex-direction: column;
-            width: 300px;
-            height: 400px;
-            background: white;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            position: absolute;
-            bottom: 60px;
-            left: 0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
-        #dealeramigo-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            font-size: 14px;
-        }
-        #dealeramigo-input {
-            display: flex;
-            border-top: 1px solid #eee;
-        }
-        #dealeramigo-input input {
-            flex: 1;
-            padding: 8px;
-            border: none;
-            border-radius: 0;
-            outline: none;
-        }
-        #dealeramigo-input button {
-            padding: 8px 12px;
-            background: #6e00ff;
-            color: white;
-            border: none;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
-<body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div style="display: flex; align-items: center;">
-                    <div class="logo">DealerAmigo</div>
-                    <div class="tagline">Automatiza. Atrae. Vende.</div>
-                </div>
-                <a href="tel:+17875301101" class="cta-button">📞 Llamar Ahora</a>
-            </div>
-        </div>
-    </header>
-
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>🚀 OFERTAS DE SERVICIO 2025</h1>
-            <p class="hero-subtitle">Publicidad + Producción + Asistente Virtual para Dealers y Negocios Locales</p>
-            <a href="#paquetes" class="cta-button">Ver Paquetes</a>
+            <div class="hero-content">
+                <h1>🚗 DealerAmigo</h1>
+                <h2>Automatiza • Atrae • Vende</h2>
+                <p>Genera leads y ventas mientras duermes.<br>Tu asistente virtual que nunca descansa.</p>
+                <a href="https://calendly.com/autoamigo" class="cta-button">Ver Demo Gratis</a>
+            </div>
         </div>
     </section>
 
-    <section class="value-props">
+    <!-- Pain Points -->
+    <section class="pain-points">
         <div class="container">
-            <div class="value-prop">
-                <div class="icon">✨</div>
-                <div>
-                    <h3>"Haz más con menos"</h3>
-                    <p>Automatiza tu atención, vende más sin contratar más personal.</p>
+            <h2>¿Te suena familiar?</h2>
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <h3>📞 Pierdes clientes fuera de horario</h3>
+                    <p>Cada cliente que escribe por la noche o fines de semana es una venta perdida</p>
                 </div>
-            </div>
-
-            <div class="value-prop">
-                <div class="icon">👉</div>
-                <div>
-                    <h3>"No vendas más, cierra mejor"</h3>
-                    <p>Nuestro bot califica, agenda y da seguimiento para que tú solo te concentres en cerrar.</p>
+                <div class="pain-card">
+                    <h3>👥 Falta de personal</h3>
+                    <p>No tienes suficiente equipo para atender todos los leads que llegan</p>
                 </div>
-            </div>
-
-            <div class="value-prop">
-                <div class="icon">💰</div>
-                <div>
-                    <h3>"Estás perdiendo dinero y ni lo sabes"</h3>
-                    <p>Cada cliente que no contestas es una venta que se fue... ¿cuántos te han escrito hoy sin respuesta?</p>
+                <div class="pain-card">
+                    <h3>⏱️ Tiempo perdido en tareas repetitivas</h3>
+                    <p>Tu equipo gasta horas en preguntas básicas y agendando citas</p>
                 </div>
-            </div>
-
-            <div class="value-prop">
-                <div class="icon">📊</div>
-                <div>
-                    <h3>"Lo que no se mide, no crece"</h3>
-                    <p>Cada lead que entra queda registrado. Cada acción tiene seguimiento. Todo está medido.</p>
-                </div>
-            </div>
-
-            <div class="value-prop">
-                <div class="icon">⚡</div>
-                <div>
-                    <h3>"Transforma tu negocio en 30 días"</h3>
-                    <p>En solo un mes tendrás presencia digital, un bot atendiendo 24/7 y una campaña corriendo.</p>
-                </div>
-            </div>
-
-            <div class="value-prop">
-                <div class="icon">🎯</div>
-                <div>
-                    <h3>"No es magia. Es estrategia."</h3>
-                    <p>Cada campaña está pensada para atraer a tu cliente ideal. Esto no es suerte, es ejecución.</p>
-                </div>
-            </div>
-
-            <div class="value-prop">
-                <div class="icon">🤝</div>
-                <div>
-                    <h3>"Tú vendes. Yo te consigo el cliente."</h3>
-                    <p>Tú eres el experto en cerrar. Yo me encargo de que lleguen leads calificados a tu WhatsApp.</p>
+                <div class="pain-card">
+                    <h3>🔍 Leads sin calificar</h3>
+                    <p>Pierdes tiempo con clientes que no están listos para comprar</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="packages" id="paquetes">
+    <!-- Solution -->
+    <section class="solution">
         <div class="container">
-            <h2>Nuestros Paquetes</h2>
-            <div class="packages-grid">
-                <div class="package-card">
-                    <h3 class="package-title">🌟 PAQUETE INICIAL</h3>
-                    <p class="package-subtitle">"Presencia Inteligente"<br>Ideal para comenzar a captar clientes sin complicarte</p>
-                    <div class="package-price">Desde $450<span style="font-size: 1rem;">/mes</span></div>
-                    <ul class="package-features">
-                        <li>Publicaciones semanales en redes sociales</li>
-                        <li>1 a 2 reels mensuales</li>
-                        <li>Copywriting y diseño gráfico profesional</li>
-                        <li>Asistente virtual DealerAmigo para atender mensajes y agendar citas</li>
-                        <li>Reporte mensual de resultados</li>
+            <h2>La Solución: DealerAmigo</h2>
+            <p class="solution-subtitle">Tu empleado virtual que nunca se enferma, nunca duerme y siempre vende</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🤖</span>
+                    <h3>Atención 24/7</h3>
+                    <p>Conmigo, tendrás un 'empleado' que nunca duerme ni se enferma. Capturo leads las 24 horas.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Filtrado Inteligente</h3>
+                    <p>Solo te pasaré a los clientes que están listos para comprar. Tu tiempo vale oro.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Automatización Total</h3>
+                    <p>Dejo que tu equipo se enfoque en vender, yo me encargo de las citas y el seguimiento.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">📈</span>
+                    <h3>Aumenta Productividad</h3>
+                    <p>Ahorra tiempo a tu equipo y aumenta su productividad con leads pre-calificados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section class="demo-section" id="demo">
+        <div class="container">
+            <h2>Mira cómo funciona DealerAmigo</h2>
+            <p>Conversación real con un cliente potencial</p>
+            
+            <div class="chat-demo">
+                <div class="chat-header">
+                    <h3>DealerAmigo Chat</h3>
+                </div>
+                <div class="chat-messages" id="demoChat">
+                    <div class="chat-message bot-msg">
+                        <div class="msg-bubble">¡Hola! ¿Qué auto buscas hoy? 🚗</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="demo-btn" onclick="startChatDemo()">▶ Iniciar Demo</button>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing">
+        <div class="container">
+            <h2>Planes que se Adaptan a Ti</h2>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Básico</div>
+                    <div class="plan-price">$297<small>/mes</small></div>
+                    <ul class="plan-features">
+                        <li>Web Bot CHAT GPT 3.5 turbo</li>
+                        <li>Captura de leads 24/7</li>
+                        <li>Respuestas automáticas</li>
+                        <li>Soporte por email</li>
                     </ul>
-                    <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="cta-button">Elegir Plan</a>
+                    <a href="https://calendly.com/autoamigo" class="cta-button">Empezar Ahora</a>
                 </div>
+                
+                <div class="pricing-card featured">
+                    <div class="plan-name">Profesional</div>
+                    <div class="plan-price">$997<small>/mes</small></div>
+                    <ul class="plan-features">
+                        <li>Todo del plan Básico</li>
+                        <li>Calificación inteligente de leads</li>
+                        <li>Integración con CRM</li>
+                        <li>Reportes detallados</li>
+                        <li>Soporte prioritario</li>
+                        <li>Seguimiento Automatizado GPT-4o</li>
 
-                <div class="package-card">
-                    <h3 class="package-title">⚡ PAQUETE AVANZADO</h3>
-                    <p class="package-subtitle">"Impulso Comercial"<br>Para negocios que ya venden y quieren escalar</p>
-                    <div class="package-price">Desde $1,000<span style="font-size: 1rem;">/mes</span></div>
-                    <ul class="package-features">
-                        <li>2 Campañas activas (Redes Sociales o Google Ads)</li>
-                        <li>Remarketing inteligente</li>
-                        <li>Diseño gráfico y copys de alto impacto</li>
-                        <li>Landing page con inventario + chatbot integrado</li>
-                        <li>Producción mensual de contenido visual (video, reels, fotos)</li>
-                        <li>Asistente Virtual 24/7 + hoja de seguimiento automatizada</li>
                     </ul>
-                    <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="cta-button">Elegir Plan</a>
+                    <a href="https://calendly.com/autoamigo" class="cta-button">Más Popular</a>
                 </div>
-
-                <div class="package-card">
-                    <h3 class="package-title">🚀 PAQUETE PREMIUM</h3>
-                    <p class="package-subtitle">"Dominio Total"<br>Para negocios listos para liderar su mercado local y digital</p>
-                    <div class="package-price">$2,000-$2,500<span style="font-size: 1rem;">/mes</span></div>
-                    <ul class="package-features">
-                        <li>Publicidad omnicanal (Redes + Google + Email/SMS)</li>
-                        <li>Producción de contenido para TV, radio o prensa</li>
-                        <li>Landing page avanzada + dashboard en tiempo real</li>
-                        <li>Múltiples campañas simultáneas con optimización continua</li>
-                        <li>Integración con CRM y analíticas completas</li>
-                        <li>Asistente Virtual entrenado con respuestas por intención y ubicación</li>
+                
+                <div class="pricing-card">
+                    <div class="plan-name">Enterprise</div>
+                    <div class="plan-price">$997<small>/mes</small></div>
+                    <ul class="plan-features">
+                        <li>Todo del plan Profesional</li>
+                        <li>Bot personalizado 100% GPT-4o</li>
+                        <li>Múltiples sucursales</li>
+                        <li>API personalizada</li>
+                        <li>Soporte dedicado 24/7</li>
                     </ul>
-                    <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="cta-button">Elegir Plan</a>
+                    <a href="https://calendly.com/autoamigo" class="cta-button">Contactar</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="addons">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <h2>📌 SERVICIOS A LA CARTA</h2>
-            <div class="addon-item">
-                <span>Diseño de landing adicional</span>
-                <span class="addon-price">$450</span>
-            </div>
-            <div class="addon-item">
-                <span>Producción de video estilo TV/web</span>
-                <span class="addon-price">desde $450</span>
-            </div>
-            <div class="addon-item">
-                <span>Publicidad en TV (WAPA) - 11 anuncios de 30s</span>
-                <span class="addon-price">$3,250/semana</span>
-            </div>
-            <div class="addon-item">
-                <span>Página completa en prensa (Metro / El Nuevo Día)</span>
-                <span class="addon-price">desde $6,984</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="notes">
-        <div class="container">
-            <h3>🔹 NOTAS IMPORTANTES</h3>
-            <ul>
-                <li>Los precios no incluyen presupuesto de pauta publicitaria (se recomienda invertir desde $350 mensuales en Meta o Google).</li>
-                <li>Todos los paquetes incluyen seguimiento de leads en tiempo real mediante hoja de Google.</li>
-                <li>Se pueden ajustar los paquetes mes a mes según necesidades.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="cta">
-        <div class="container">
-            <h2 class="text-3xl font-bold text-center text-white mb-6">¿Listo para transformar tu dealer?</h2>
-            <p class="text-center text-white mb-6">Automatiza, produce y atrae... mientras tú te concentras en cerrar.</p>
-            <div class="flex justify-center space-x-4">
-                <a href="https://calendly.com/autoamigo" class="bg-white text-violet-800 font-bold py-3 px-6 rounded-2xl shadow-lg hover:bg-violet-100 transition">Agendar llamada</a>
-                <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="bg-violet-600 text-white font-bold py-3 px-6 rounded-2xl shadow-lg hover:bg-violet-700 transition">Solicita tu demo aquí</a>
-            </div>
-        </div>
-    </section>
-
-    <footer id="contacto">
-        <div class="container">
-            <div class="footer-cta">
-                DealerAmigo está diseñado para ayudarte a automatizar tu proceso de captación y concentrarte en cerrar ventas.
-            </div>
-            <div style="font-size: 1.2rem; margin-bottom: 20px;">
-                <strong>¿Listo para comenzar?</strong>
-            </div>
-            <a href="https://calendly.com/autoamigo" class="cta-button" style="margin-right: 20px;">📞 Agenda una Llamada</a>
-            <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="cta-button">📧 Solicita Propuesta</a>
+            <p>&copy; 2024 DealerAmigo. Automatiza • Atrae • Vende</p>
         </div>
     </footer>
 
-    <a href="tel:+17875301101" class="floating-whatsapp" title="Llamar al 787-530-1101">
-        📞
-    </a>
-
-    <!-- DealerAmigo Chat Widget -->
-    <div id="dealeramigo-widget">
-        <div id="dealeramigo-chat">
-            <div id="dealeramigo-messages"></div>
-            <div id="dealeramigo-input">
-                <input type="text" id="dealeramigo-userinput" placeholder="Escribe algo..." />
-                <button onclick="sendDealerAmigo()">Enviar</button>
-            </div>
-        </div>
-        <button id="dealeramigo-button" onclick="toggleDealerAmigo()">💬 ¿Buscas tu próximo carro?</button>
-    </div>
-
     <script>
-        // Smooth scrolling para los enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        const demoConversation = [
+            { type: 'user', text: 'Busco un SUV usado' },
+            { type: 'bot', text: '¿Cuál es tu presupuesto?' },
+            { type: 'user', text: 'Entre $15,000 y $25,000' },
+            { type: 'bot', text: 'Perfecto! Tengo 3 opciones:<br>🚗 Honda CR-V 2019 - $22,500<br>🚗 Toyota RAV4 2018 - $21,800<br>🚗 Mazda CX-5 2020 - $24,200' },
+            { type: 'user', text: 'Me interesa el Honda' },
+            { type: 'bot', text: '¡Excelente! ¿Te gustaría agendar una cita para mañana? Solo necesito tu nombre y teléfono.' },
+            { type: 'user', text: 'Sí, soy Carlos: 787-555-0123' },
+            { type: 'bot', text: '✅ Perfecto Carlos! Cita agendada para mañana 10am. Un especialista te contactará. ¡LEAD CALIFICADO!' }
+        ];
 
-        // Animación de entrada para las value props
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        });
-
-        document.querySelectorAll('.value-prop, .package-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-        // DealerAmigo Widget Functions
-        function toggleDealerAmigo() {
-            const chat = document.getElementById("dealeramigo-chat");
-            chat.style.display = chat.style.display === "flex" ? "none" : "flex";
+        function startChatDemo() {
+            const chatDiv = document.getElementById('demoChat');
+            chatDiv.innerHTML = '<div class="chat-message bot-msg"><div class="msg-bubble">¡Hola! ¿Qué auto buscas hoy? 🚗</div></div>';
+            
+            let index = 0;
+            function addMessage() {
+                if (index >= demoConversation.length) return;
+                
+                const msg = demoConversation[index];
+                const messageClass = msg.type === 'bot' ? 'bot-msg' : 'user-msg';
+                
+                setTimeout(() => {
+                    chatDiv.innerHTML += `
+                        <div class="chat-message ${messageClass}">
+                            <div class="msg-bubble">${msg.text}</div>
+                        </div>
+                    `;
+                    chatDiv.scrollTop = chatDiv.scrollHeight;
+                    index++;
+                    addMessage();
+                }, 1500);
+            }
+            
+            addMessage();
         }
-        
-        function appendDealerMessage(text, isBot = false) {
-            const messagesDiv = document.getElementById("dealeramigo-messages");
-            const msg = document.createElement("div");
-            msg.style.margin = "8px 0";
-            msg.style.textAlign = isBot ? "left" : "right";
-            msg.innerText = text;
-            messagesDiv.appendChild(msg);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        <!-- DealerAmiGo Chat Widget -->
 
- </script>
-
+        // Auto-start demo after 3 seconds
+        setTimeout(() => {
+            startChatDemo();
+        }, 3000);
+    </script>
 </body>
 </html>
