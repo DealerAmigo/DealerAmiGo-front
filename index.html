@@ -634,26 +634,107 @@
             observer.observe(el);
         });
 
+<!-- Demo Chat Script -->
+<script>
+    const demoConversation = [
+        { type: 'user', text: 'Busco un SUV usado' },
+        { type: 'bot', text: '¿Cuál es tu presupuesto?' },
+        { type: 'user', text: 'Entre $15,000 y $25,000' },
+        { type: 'bot', text: 'Perfecto! Tengo 3 opciones:<br>🚗 Honda CR-V 2019 - $22,500<br>🚗 Toyota RAV4 2018 - $21,800<br>🚗 Mazda CX-5 2020 - $24,200' },
+        { type: 'user', text: 'Me interesa el Honda' },
+        { type: 'bot', text: '¡Excelente! ¿Te gustaría agendar una cita para mañana? Solo necesito tu nombre y teléfono.' },
+        { type: 'user', text: 'Sí, soy Carlos: 787-555-0123' },
+        { type: 'bot', text: '✅ Perfecto Carlos! Cita agendada para mañana 10am. Un especialista te contactará. ¡LEAD CALIFICADO!' }
+    ];
+
+    function startChatDemo() {
+        const chatDiv = document.getElementById('demoChat');
+        chatDiv.innerHTML = '<div class="chat-message bot-msg"><div class="msg-bubble">¡Hola! ¿Qué auto buscas hoy? 🚗</div></div>';
+
+        let index = 0;
+        function addMessage() {
+            if (index >= demoConversation.length) return;
+
+            const msg = demoConversation[index];
+            const messageClass = msg.type === 'bot' ? 'bot-msg' : 'user-msg';
+
+            setTimeout(() => {
+                chatDiv.innerHTML += `
+                    <div class="chat-message ${messageClass}">
+                        <div class="msg-bubble">${msg.text}</div>
+                    </div>
+                `;
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+                index++;
+                addMessage();
+            }, 1500);
+        }
+
+        addMessage();
+    }
+
+    setTimeout(() => {
+        startChatDemo();
+    }, 3000);
+</script>
+
+<!-- Call to Action Section -->
+<section class="cta">
+    <div class="container">
+        <h2 class="text-3xl font-bold text-center text-white mb-6">¿Listo para transformar tu dealer?</h2>
+        <p class="text-center text-white mb-6">Automatiza, produce y atrae... mientras tú te concentras en cerrar.</p>
+        <div class="flex justify-center space-x-4">
+            <a href="tel:+17875301101" class="floating-whatsapp" title="Llamar al 787-530-1101">📞</a>
+        </div>
+    </div>
+</section>
 
 <!-- Footer -->
-    <footer class="footer">
-<footer class="bg-gray-900 text-white text-center py-8 mt-12">
-  <div class="max-w-4xl mx-auto px-4">
-    <p class="mb-4">
-      DealerAmigo está diseñado para ayudarte a automatizar tu proceso de captación y concentrarte en cerrar ventas.
-    </p>
-    <p class="text-lg font-semibold mb-4">¿Listo para comenzar?</p>
-    <div class="flex justify-center gap-4 mb-6 flex-wrap">
-      <a href="https://calendly.com/autoamigo" class="bg-yellow-500 text-black font-bold py-2 px-4 rounded hover:bg-yellow-400">
-        📞 Agenda una Llamada
-      </a>
-      <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="bg-white text-black font-bold py-2 px-4 rounded hover:bg-gray-200">
-        📧 Solicita Propuesta
-      </a>
+<footer class="footer bg-gray-900 text-white text-center py-8 mt-12" id="contacto">
+    <div class="container">
+        <p class="mb-4">DealerAmigo está diseñado para ayudarte a automatizar tu proceso de captación y concentrarte en cerrar ventas.</p>
+        <p class="text-lg font-semibold mb-4">¿Listo para comenzar?</p>
+        <div class="flex justify-center gap-4 mb-6 flex-wrap">
+            <a href="https://calendly.com/autoamigo" class="cta-button">📞 Agenda una Llamada</a>
+            <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="cta-button">📧 Solicita Propuesta</a>
+        </div>
+        <p class="text-sm text-gray-400">&copy; 2025 DealerAmigo. Automatiza • Atrae • Vende</p>
     </div>
-    <p class="text-sm text-gray-400">&copy; 2025 DealerAmigo. Automatiza • Atrae • Vende</p>
-  </div>
+
+    <!-- Botón flotante de teléfono -->
+    <a href="tel:+17875301101" class="floating-whatsapp" title="Llamar al 787-530-1101">📞</a>
 </footer>
+
+<!-- Scripts adicionales -->
+<script>
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Intersection animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    });
+
+    document.querySelectorAll('.value-prop, .package-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+</script>
+
 
 </body>
 </html>
