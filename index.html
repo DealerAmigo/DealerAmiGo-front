@@ -610,29 +610,12 @@
             <h2 class="text-3xl font-bold text-center text-white mb-6">¿Listo para transformar tu dealer?</h2>
             <p class="text-center text-white mb-6">Automatiza, produce y atrae... mientras tú te concentras en cerrar.</p>
             <div class="flex justify-center space-x-4">
-                <a href="https://calendly.com/autoamigo" class="bg-white text-violet-800 font-bold py-3 px-6 rounded-2xl shadow-lg hover:bg-violet-100 transition">Agendar llamada</a>
-                <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="bg-violet-600 text-white font-bold py-3 px-6 rounded-2xl shadow-lg hover:bg-violet-700 transition">Solicita tu demo aquí</a>
-            </div>
-        </div>
-    </section>
-  
+                 
   <a href="tel:+17875301101" class="floating-whatsapp" title="Llamar al 787-530-1101">
         📞
     </a>
 
-    <!-- DealerAmigo Chat Widget -->
-    <div id="dealeramigo-widget">
-        <div id="dealeramigo-chat">
-            <div id="dealeramigo-messages"></div>
-            <div id="dealeramigo-input">
-                <input type="text" id="dealeramigo-userinput" placeholder="Escribe algo..." />
-                <button onclick="sendDealerAmigo()">Enviar</button>
-            </div>
-        </div>
-        <button id="dealeramigo-button" onclick="toggleDealerAmigo()">💬 ¿Buscas tu próximo carro?</button>
-    </div>
-
-    <script>
+      <script>
         // Smooth scrolling para los enlaces internos
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -660,23 +643,7 @@
             observer.observe(el);
         });
 
-        // DealerAmigo Widget Functions
-        function toggleDealerAmigo() {
-            const chat = document.getElementById("dealeramigo-chat");
-            chat.style.display = chat.style.display === "flex" ? "none" : "flex";
-        }
-        
-        function appendDealerMessage(text, isBot = false) {
-            const messagesDiv = document.getElementById("dealeramigo-messages");
-            const msg = document.createElement("div");
-            msg.style.margin = "8px 0";
-            msg.style.textAlign = isBot ? "left" : "right";
-            msg.innerText = text;
-            messagesDiv.appendChild(msg);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        <!-- DealerAmiGo Chat Widget -->
-
- </script>
+    
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
