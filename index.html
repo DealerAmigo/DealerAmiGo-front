@@ -732,6 +732,34 @@
     });
 </script>
 
+<!-- Botón flotante con imagen que abre Calendly en nueva pestaña -->
+<a href="https://calendly.com/autoamigo/solicita-demo-convierte-tu-dealer-en-leader" target="_blank"
+   style="
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     z-index: 9999;
+     display: flex;
+     align-items: center;
+     background: gold;
+     padding: 8px 12px;
+     border-radius: 50px;
+     box-shadow: 0 0 15px rgba(255,215,0,0.8);
+     animation: float 2s ease-in-out infinite;
+     text-decoration: none;
+   ">
+  <img src="images/AsistenteVirtual.png" alt="Asistente Virtual" style="width: 40px; height: auto; margin-right: 8px;">
+  <span style="font-size: 14px; font-weight: bold; color: #333;">
+    OFERTA ESPECIAL HOY
+  </span>
+</a>
+
+<style>
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+</style>
 
 </body>
 </html>
