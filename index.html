@@ -732,8 +732,8 @@
     });
 </script>
 
-<!-- Botón flotante con imagen que abre Calendly en nueva pestaña -->
-<a href="https://calendly.com/autoamigo" target="_blank"
+<!-- Botón flotante con imagen que llama directamente al 787-530-1101 -->
+<a href="tel:7875301101" 
    style="
      position: fixed;
      bottom: 20px;
@@ -747,9 +747,11 @@
      box-shadow: 0 0 15px rgba(255,215,0,0.8);
      animation: float 2s ease-in-out infinite;
      text-decoration: none;
-   ">
+     cursor: pointer;
+   "
+   aria-label="Llamar a Wilfredo al 787 530 1101">
   <img src="images/AsistenteVirtual.png" alt="Asistente Virtual" style="width: 40px; height: auto; margin-right: 8px;">
-  <span style="font-size: 14px; font-weight: bold; color: #333;">
+  <span style="font-size: 14px; font-weight: bold; color: #222;">
     OFERTA ESPECIAL HOY
   </span>
 </a>
