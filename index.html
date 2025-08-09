@@ -60,6 +60,13 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
+        .hero-content h2 {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
         .hero-content p {
             font-size: clamp(1.1rem, 2vw, 1.5rem);
             margin-bottom: 30px;
@@ -78,6 +85,7 @@
             box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
             transition: all 0.3s ease;
             animation: pulse-glow 2s infinite;
+            margin: 10px;
         }
 
         @keyframes pulse-glow {
@@ -121,6 +129,7 @@
 
         .pain-card:hover {
             transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
         }
 
         .pain-card h3 {
@@ -203,6 +212,11 @@
             text-align: center;
         }
 
+        .demo-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
         .chat-demo {
             max-width: 400px;
             margin: 40px auto;
@@ -237,6 +251,11 @@
             animation: blink 2s infinite;
         }
 
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
         .chat-messages {
             height: 300px;
             overflow-y: auto;
@@ -262,6 +281,12 @@
             padding: 12px 16px;
             border-radius: 18px;
             font-size: 14px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .bot-msg .msg-bubble {
@@ -285,6 +310,7 @@
             cursor: pointer;
             margin-top: 20px;
             transition: all 0.3s ease;
+            font-weight: bold;
         }
 
         .demo-btn:hover {
@@ -325,6 +351,7 @@
         .pricing-card.featured {
             border-color: #ff6b35;
             transform: scale(1.05);
+            background: linear-gradient(135deg, #fff 0%, #fff8f5 100%);
         }
 
         .pricing-card:hover {
@@ -353,25 +380,66 @@
         .plan-features {
             list-style: none;
             margin-bottom: 30px;
+            text-align: left;
         }
 
         .plan-features li {
             padding: 8px 0;
             border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 25px;
         }
 
         .plan-features li::before {
             content: '✓';
             color: #4CAF50;
-            margin-right: 10px;
+            position: absolute;
+            left: 0;
             font-weight: bold;
         }
 
         .footer {
             background: #1a1a2e;
             color: white;
-            padding: 40px 0;
+            padding: 60px 0 40px;
             text-align: center;
+        }
+
+        .footer h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .phone-cta {
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse-phone 3s infinite;
+        }
+
+        @keyframes pulse-phone {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .phone-cta:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.5);
         }
 
         @media (max-width: 768px) {
@@ -392,6 +460,40 @@
             .pricing-card.featured:hover {
                 transform: translateY(-5px);
             }
+
+            .footer-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .typing-indicator {
+            display: none;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .typing-indicator .msg-bubble {
+            background: white;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            animation: typing 1.5s infinite;
+        }
+
+        @keyframes typing {
+            0%, 60% { opacity: 0.3; }
+            30% { opacity: 1; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -413,27 +515,27 @@
         <div class="container">
             <h2>¿Te suena familiar?</h2>
             <div class="pain-grid">
-                <div class="pain-card">
+                <div class="pain-card fade-in">
                     <h3>📞 Pierdes clientes fuera de horario</h3>
                     <p>Cada cliente que escribe por la noche o fines de semana es una venta perdida</p>
                 </div>
-                <div class="pain-card">
+                <div class="pain-card fade-in">
                     <h3>👥 Falta de personal</h3>
                     <p>No tienes suficiente equipo para atender todos los leads que llegan</p>
                 </div>
-                <div class="pain-card">
+                <div class="pain-card fade-in">
                     <h3>⏱️ Tiempo perdido en tareas repetitivas</h3>
                     <p>Tu equipo gasta horas en preguntas básicas y agendando citas</p>
                 </div>
-                <div class="pain-card">
+                <div class="pain-card fade-in">
                     <h3>🔍 Leads sin calificar</h3>
                     <p>Pierdes tiempo con clientes que no están listos para comprar</p>
                 </div>
-                <div class="pain-card">
+                <div class="pain-card fade-in">
                     <h3>💸 Competencia te roba clientes</h3>
                     <p>Mientras tú tardas horas en responder, otros dealers ya cerraron la venta</p>
                 </div>
-                <div class="pain-card">
+                <div class="pain-card fade-in">
                     <h3>📊 Sin seguimiento efectivo</h3>
                     <p>Los clientes interesados se olvidan porque no hay un sistema de seguimiento constante</p>
                 </div>
@@ -448,36 +550,37 @@
             <p class="solution-subtitle">Tu empleado virtual que nunca se enferma, nunca duerme y siempre vende</p>
             
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <span class="feature-icon">🤖</span>
                     <h3>Atención 24/7</h3>
                     <p>Conmigo, tendrás un 'empleado' que nunca duerme ni se enferma. Capturo leads las 24 horas.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <span class="feature-icon">🎯</span>
                     <h3>Filtrado Inteligente</h3>
                     <p>Solo te pasaré a los clientes que están listos para comprar. Tu tiempo vale oro.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <span class="feature-icon">⚡</span>
                     <h3>Automatización Total</h3>
                     <p>Dejo que tu equipo se enfoque en vender, yo me encargo de las citas y el seguimiento.</p>
                 </div>
                 
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <span class="feature-icon">📈</span>
                     <h3>Aumenta Productividad</h3>
                     <p>Ahorra tiempo a tu equipo y aumenta su productividad con leads pre-calificados.</p>
                 </div>
-                <div class="feature-card">
+                
+                <div class="feature-card fade-in">
                     <span class="feature-icon">🚀</span>
                     <h3>Respuesta Instantánea</h3>
                     <p>Respondo en segundos, no en horas. Tus clientes nunca esperarán y la competencia no tendrá oportunidad.</p>
                 </div>
 
-                <div class="feature-card">
+                <div class="feature-card fade-in">
                     <span class="feature-icon">🔄</span>
                     <h3>Seguimiento Automático</h3>
                     <p>Mantengo contacto con los clientes potenciales hasta que estén listos para comprar. Nunca se me olvida un lead.</p>
@@ -501,6 +604,9 @@
                         <div class="msg-bubble">¡Hola! ¿Qué auto buscas hoy? 🚗</div>
                     </div>
                 </div>
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="msg-bubble">Escribiendo...</div>
+                </div>
             </div>
             
             <button class="demo-btn" onclick="startChatDemo()">▶ Iniciar Demo</button>
@@ -513,47 +619,47 @@
             <h2>Planes que se Adaptan a Ti</h2>
             
             <div class="pricing-grid">
-                <div class="pricing-card">
+                <div class="pricing-card fade-in">
                     <div class="plan-name">Básico</div>
-                    <div class="plan-price">$<small>/mes</small></div>
+                    <div class="plan-price">$497<small>/mes</small></div>
                     <ul class="plan-features">
-                        <li>Web Bot CHAT GPT 3.5 turbo</li>
+                        <li>Web Bot CHAT GPT 4o turbo</li>
                         <li>Captura de leads 24/7</li>
                         <li>Respuestas automáticas</li>
-                        <li>Campa~a Mensual Estrategica</li>
+                        <li>Campaña Mensual Estratégica</li>
+                        <li>Soporte básico</li>
                     </ul>
                     <a href="https://calendly.com/autoamigo/solicita-demo-convierte-tu-dealer-en-leader" class="cta-button">Empezar Ahora</a>
                 </div>
                 
-                <div class="pricing-card featured">
-                    <div class="plan-name">Profesional</div>
-                    <div class="plan-price">$<small>/mes</small></div>
+                <div class="pricing-card featured fade-in">
+                    <div class="plan-name">Profesional ⭐</div>
+                    <div class="plan-price">$1,099<small>/mes</small></div>
                     <ul class="plan-features">
                         <li>Todo del plan Básico</li>
                         <li>Seguimiento Inteligente / GPT-4o</li>
-                        <li>2 Campanas Estrategicas</li>
+                        <li>2 Campañas Estratégicas</li>
                         <li>Integración con CRM</li>
                         <li>Reportes detallados</li>
                         <li>Soporte prioritario</li>
-                        <li>Calificacion Inteligente de leads</li>
-
+                        <li>Calificación Inteligente de leads</li>
                     </ul>
                     <a href="https://calendly.com/autoamigo/solicita-demo-convierte-tu-dealer-en-leader" class="cta-button">Más Popular</a>
                 </div>
                 
-                <div class="pricing-card">
+                <div class="pricing-card fade-in">
                     <div class="plan-name">Enterprise</div>
-                    <div class="plan-price">$ <small>/mes</small></div>
+                    <div class="plan-price">$1,650<small>/mes</small></div>
                     <ul class="plan-features">
                         <li>Todo del plan Profesional</li>
-                        <li>2X Bot personalizado 100% GPT-4o</li>
-                        <li>Múltiples sucursales</li>
+                        <li>2X Bot personalizado 100% GPT-5</li>
+                        <li>Múltiples Canales</li>
                         <li>API personalizada</li>
                         <li>Seguimiento dedicado 24/7</li>
-                        <li>4 campa~as de publicidad Mensual</li>
-                        <li>Contenido Estrategico</li>
-                        <li>Automatizacion Avanzada</li>
-                        <li>Sistema Completo</li>
+                        <li>4 campañas de publicidad Mensual</li>
+                        <li>Contenido Estratégico</li>
+                        <li>Automatización Avanzada</li>
+                        <li>Sistema Completo / No Pierdas Mas...</li>
                     </ul>
                     <a href="https://calendly.com/autoamigo/solicita-demo-convierte-tu-dealer-en-leader" class="cta-button">Contactar</a>
                 </div>
@@ -561,6 +667,21 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <h2>¿Listo para transformar tu dealer?</h2>
+            <p style="margin-bottom: 30px;">DealerAmigo está diseñado para ayudarte a automatizar tu proceso de captación y concentrarte en cerrar ventas.</p>
+            
+            <div class="footer-buttons">
+                <a href="https://calendly.com/autoamigo" class="cta-button">📅 Agenda una Llamada</a>
+                <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="cta-button">📧 Demo Virtual</a>
+                <a href="tel:+17875301101" class="phone-cta">📞 LLAMAR AHORA - 787-530-1101</a>
+            </div>
+            
+            <p style="margin-top: 40px; opacity: 0.7;">&copy; 2025 DealerAmigo. Automatiza • Atrae • Vende</p>
+        </div>
+    </footer>
 
     <script>
         const demoConversation = [
@@ -574,6 +695,18 @@
             { type: 'bot', text: '✅ Perfecto Carlos! Cita agendada para mañana 10am. Un especialista te contactará. ¡LEAD CALIFICADO!' }
         ];
 
+        function showTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = 'flex';
+            const chatDiv = document.getElementById('demoChat');
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = 'none';
+        }
+
         function startChatDemo() {
             const chatDiv = document.getElementById('demoChat');
             chatDiv.innerHTML = '<div class="chat-message bot-msg"><div class="msg-bubble">¡Hola! ¿Qué auto buscas hoy? 🚗</div></div>';
@@ -585,182 +718,70 @@
                 const msg = demoConversation[index];
                 const messageClass = msg.type === 'bot' ? 'bot-msg' : 'user-msg';
                 
-                setTimeout(() => {
-                    chatDiv.innerHTML += `
-                        <div class="chat-message ${messageClass}">
-                            <div class="msg-bubble">${msg.text}</div>
-                        </div>
-                    `;
-                    chatDiv.scrollTop = chatDiv.scrollHeight;
-                    index++;
-                    addMessage();
-                }, 1500);
+                // Show typing indicator for bot messages
+                if (msg.type === 'bot') {
+                    showTypingIndicator();
+                    setTimeout(() => {
+                        hideTypingIndicator();
+                        chatDiv.innerHTML += `
+                            <div class="chat-message ${messageClass}">
+                                <div class="msg-bubble">${msg.text}</div>
+                            </div>
+                        `;
+                        chatDiv.scrollTop = chatDiv.scrollHeight;
+                        index++;
+                        addMessage();
+                    }, 1000);
+                } else {
+                    setTimeout(() => {
+                        chatDiv.innerHTML += `
+                            <div class="chat-message ${messageClass}">
+                                <div class="msg-bubble">${msg.text}</div>
+                            </div>
+                        `;
+                        chatDiv.scrollTop = chatDiv.scrollHeight;
+                        index++;
+                        addMessage();
+                    }, 800);
+                }
             }
             
             addMessage();
         }
 
-        // Auto-start demo after 4 seconds
+        // Auto-start demo after page load
         setTimeout(() => {
             startChatDemo();
         }, 3000);
-    </script>
 
-      <script>
-        // Smooth scrolling para los enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Animación de entrada para las value props
+        // Intersection Observer for fade-in animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
             });
         });
-
-        document.querySelectorAll('.value-prop, .package-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-<!-- Demo Chat Script -->
-<script>
-    const demoConversation = [
-        { type: 'user', text: 'Busco un SUV usado' },
-        { type: 'bot', text: '¿Cuál es tu presupuesto?' },
-        { type: 'user', text: 'Entre $15,000 y $25,000' },
-        { type: 'bot', text: 'Perfecto! Tengo 3 opciones:<br>🚗 Honda CR-V 2019 - $22,500<br>🚗 Toyota RAV4 2018 - $21,800<br>🚗 Mazda CX-5 2020 - $24,200' },
-        { type: 'user', text: 'Me interesa el Honda' },
-        { type: 'bot', text: '¡Excelente! ¿Te gustaría agendar una cita para mañana? Solo necesito tu nombre y teléfono.' },
-        { type: 'user', text: 'Sí, soy Carlos: 787-555-0123' },
-        { type: 'bot', text: '✅ Perfecto Carlos! Cita agendada para mañana 10am. Un especialista te contactará. ¡LEAD CALIFICADO!' }
-    ];
-
-    function startChatDemo() {
-        const chatDiv = document.getElementById('demoChat');
-        chatDiv.innerHTML = '<div class="chat-message bot-msg"><div class="msg-bubble">¡Hola! ¿Qué auto buscas hoy? 🚗</div></div>';
-
-        let index = 0;
-        function addMessage() {
-            if (index >= demoConversation.length) return;
-
-            const msg = demoConversation[index];
-            const messageClass = msg.type === 'bot' ? 'bot-msg' : 'user-msg';
-
-            setTimeout(() => {
-                chatDiv.innerHTML += `
-                    <div class="chat-message ${messageClass}">
-                        <div class="msg-bubble">${msg.text}</div>
-                    </div>
-                `;
-                chatDiv.scrollTop = chatDiv.scrollHeight;
-                index++;
-                addMessage();
-            }, 1500);
-        }
-
-        addMessage();
-    }
-
-    setTimeout(() => {
-        startChatDemo();
-    }, 3000);
-</script>
-
-<!-- Footer -->
-    <footer>
-<footer class="footer bg-gray-900 text-white text-center py-8 mt-12" id="contacto">
-    <div class="container">
-        <h2 class="text-3xl font-bold text-center text-white mb-6">¿Listo para transformar tu dealer?</h2>
-        <p class="mb-4">&copy;DealerAmigo está diseñado para ayudarte a automatizar tu proceso de captación y concentrarte en cerrar ventas.</p>
-        <div class="flex justify-center gap-4 mb-6 flex-wrap">
-            <a href="https://calendly.com/autoamigo" class="cta-button">📞 Agenda una Llamada</a>
-            <a href="https://docs.google.com/forms/d/1H5ElRfHZ2vWOj6lR02jG5Ijp57GG4pteHMHmbtU4epM/viewform" class="cta-button">📧 DEMO VIRTUAL</a>
-        </div>
-    </div>
-<!-- Call to Action Section -->
-<section class="cta">
-    <div class="container">
-        <div class="flex justify-center space-x-8">
-            <a href="tel:+17875301101" class="floating-whatsapp" title="Llamar al 787-530-1101"> --->>OPTIMIZA TU NEGOCIO AQUI<<---</a>
-                <p class="text-sm text-gray-400">&copy; 2025 DealerAmigo. Automatiza • Atrae • Vende</p>
-        </div>
-    </div>
-</section>
-
- </footer>
-
-<!-- Scripts adicionales -->
-<script>
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-
-    // Intersection animation
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    });
-
-    document.querySelectorAll('.value-prop, .package-card').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
-</script>
-
-<!-- Botón flotante con imagen que llama directamente al 787-530-1101 -->
-<a href="tel:7875301101" 
-   style="
-     position: fixed;
-     bottom: 20px;
-     right: 20px;
-     z-index: 9999;
-     display: flex;
-     align-items: center;
-     background: gold;
-     padding: 12px 22px;
-     border-radius: 50px;
-     box-shadow: 0 0 15px rgba(255,215,0,0.8);
-     animation: float 2s ease-in-out infinite;
-     text-decoration: none;
-     cursor: pointer;
-   "
-   aria-label="Llamar a Wilfredo al 787 530 1101">
-    <span style="font-size: 18px; font-weight: bold; color: #222;">
-    Oferta Inteligente
-  </span>
-</a>
-
-<style>
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-</style>
-
-
+    </script>
 </body>
 </html>
