@@ -468,7 +468,6 @@ VIERNES: Planificar optimizaciones para la próxima semana
 
 🛠️ CONFIGURACIÓN INICIAL NECESARIA:
 
-1. Reemplaza 'GA_MEASUREMENT_ID' con tu ID real de Google Analytics
 2. Reemplaza 'YOUR_PIXEL_ID' con tu Facebook Pixel ID
 3. Configura las conversiones en Google Analytics
 4. Conecta Google Analytics con Google Ads (si usas)
@@ -507,9 +506,15 @@ VIERNES: Planificar optimizaciones para la próxima semana
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DealerAmigo - Optimiza • Atrae • Vende</title>
-    
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4YLQGPQBN5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4YLQGPQBN5');
+</script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -544,7 +549,7 @@ VIERNES: Planificar optimizaciones para la próxima semana
         // Check if marketing cookies are allowed
         const marketingConsent = localStorage.getItem('marketing_consent');
         if (marketingConsent === 'granted') {
-            fbq('init', 'YOUR_PIXEL_ID'); // Reemplaza con tu Pixel ID real
+            fbq('init', '1276852377513349'); // 
             fbq('track', 'PageView');
         }
     </script>
