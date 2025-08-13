@@ -1804,19 +1804,23 @@ VIERNES: Planificar optimizaciones para la próxima semana
         </div>
     </section>
 
-    <!-- Demo Section -->
+     <!-- Demo Section -->
     <section class="demo-section" id="demo">
         <div class="container">
             <h2>Mira cómo funciona DealerAmigo</h2>
-            <p>Conversación real con un cliente potencial</p>
+            <p>Prueba diferentes escenarios reales de conversación</p>
             
             <div class="chat-demo">
                 <div class="chat-header">
                     <h3>DealerAmigo Chat</h3>
                 </div>
+                <div class="scenario-info" id="scenarioInfo">
+                    <h4>Escenario: Cliente buscando SUV usado</h4>
+                    <p>Un cliente potencial contacta fuera de horario laboral</p>
+                </div>
                 <div class="chat-messages" id="demoChat">
                     <div class="chat-message bot-msg">
-                        <div class="msg-bubble">¡Hola! ¿Qué auto buscas hoy? 🚗</div>
+                        <div class="msg-bubble">¡Hola! Soy tu asistente virtual. ¿Qué auto buscas hoy? 🚗</div>
                     </div>
                 </div>
                 <div class="typing-indicator" id="typingIndicator">
@@ -1824,7 +1828,16 @@ VIERNES: Planificar optimizaciones para la próxima semana
                 </div>
             </div>
             
-            <button class="demo-btn" onclick="startChatDemo()">▶ Iniciar Demo</button>
+            <div class="demo-controls">
+                <button class="demo-btn" onclick="startScenario('suv_usado')">🚗 Cliente SUV</button>
+                <button class="demo-btn" onclick="startScenario('financiamiento')">💳 Consulta Financiamiento</button>
+                <button class="demo-btn" onclick="startScenario('modelo_especifico')">🎯 Modelo Específico</button>
+                <button class="demo-btn" onclick="startScenario('primera_vez')">👶 Primera Vez</button>
+                <button class="demo-btn" onclick="startScenario('familia')">👨‍👩‍👧‍👦 Carro Familiar</button>
+                <button class="demo-btn small" onclick="startScenario('economico')">💰 Económico</button>
+                <button class="demo-btn small" onclick="startScenario('prueba_manejo')">🚙 Prueba de Manejo</button>
+                <button class="demo-btn small" onclick="startScenario('fuera_horario')">🌙 Fuera de Horario</button>
+            </div>
         </div>
     </section>
 
@@ -1967,17 +1980,156 @@ VIERNES: Planificar optimizaciones para la próxima semana
         <p>Continuemos donde lo dejaste</p>
     </div>
 
-    <script>
-        const demoConversation = [
-            { type: 'user', text: 'Busco un SUV usado' },
-            { type: 'bot', text: '¿Cuál es tu presupuesto?' },
-            { type: 'user', text: 'Entre $15,000 y $25,000' },
-            { type: 'bot', text: 'Perfecto! Tengo 3 opciones:<br>🚗 Honda CR-V 2019 - $22,500<br>🚗 Toyota RAV4 2018 - $21,800<br>🚗 Mazda CX-5 2020 - $24,200' },
-            { type: 'user', text: 'Me interesa el Honda' },
-            { type: 'bot', text: '¡Excelente! ¿Te gustaría agendar una cita para mañana? Solo necesito tu nombre y teléfono.' },
-            { type: 'user', text: 'Sí, soy Carlos: 787-555-0123' },
-            { type: 'bot', text: '✅ Perfecto Carlos! Cita agendada para mañana 10am. Un especialista te contactará. ¡LEAD CALIFICADO!' }
-        ];
+     <script>
+        // Escenarios basados en el JSON
+        const scenarios = {
+            suv_usado: {
+                title: "Cliente buscando SUV usado",
+                description: "Un cliente potencial contacta fuera de horario laboral",
+                conversation: [
+                    { type: 'user', text: 'Busco un SUV usado entre $15,000 y $25,000' },
+                    { type: 'bot', text: '¡Perfecto! Tengo varias opciones en ese rango. ¿Prefieres alguna marca en particular? 🚗' },
+                    { type: 'user', text: 'Toyota o Honda' },
+                    { type: 'bot', text: 'Excelente elección! Tengo disponibles:<br>🔹 Toyota RAV4 2019 - $22,500<br>🔹 Honda CR-V 2020 - $24,200<br>🔹 Toyota Highlander 2018 - $21,800' },
+                    { type: 'user', text: 'Me interesa el Honda CR-V' },
+                    { type: 'bot', text: '¡Gran elección! El Honda CR-V 2020 tiene excelente historial de mantenimiento. ¿Te gustaría agendar una cita para verlo mañana?' },
+                    { type: 'user', text: 'Sí, pero necesito financiamiento' },
+                    { type: 'bot', text: 'Sin problema! Trabajamos con múltiples bancos. Para preparar tu pre-aprobación, ¿me das tu nombre y teléfono?' },
+                    { type: 'user', text: 'María González - 787-555-0123' },
+                    { type: 'bot', text: '✅ ¡Perfecto María! Cita agendada para mañana 2:00 PM. Te contactaremos para coordinar tu financiamiento. 🎉' }
+                ]
+            },
+            financiamiento: {
+                title: "Consulta sobre financiamiento",
+                description: "Cliente interesado en opciones de pago",
+                conversation: [
+                    { type: 'user', text: '¿Qué opciones de financiamiento tienen?' },
+                    { type: 'bot', text: '¡Tenemos excelentes opciones! Trabajamos con 8 bancos diferentes. ¿Cuál es tu presupuesto mensual ideal? 💳' },
+                    { type: 'user', text: 'Como $300 al mes' },
+                    { type: 'bot', text: 'Perfecto! Con $300 mensuales puedes financiar un auto de hasta $18,000. ¿Buscas algo nuevo o usado?' },
+                    { type: 'user', text: 'Usado está bien' },
+                    { type: 'bot', text: 'Tengo varios carros que se ajustan a tu pago:<br>🚗 Nissan Sentra 2020 - $295/mes<br>🚗 Toyota Corolla 2019 - $285/mes<br>🚗 Honda Civic 2021 - $310/mes' },
+                    { type: 'user', text: 'El Toyota me interesa' },
+                    { type: 'bot', text: '¡Excelente! El Corolla 2019 es súper confiable. Para hacer la pre-aprobación necesito tu nombre completo y teléfono.' },
+                    { type: 'user', text: 'Carlos Rodríguez - 939-555-0145' },
+                    { type: 'bot', text: '✅ ¡Listo Carlos! Te contactaremos mañana para tu pre-aprobación. ¡LEAD CALIFICADO CON FINANCIAMIENTO!' }
+                ]
+            },
+            modelo_especifico: {
+                title: "Búsqueda de modelo específico",
+                description: "Cliente sabe exactamente qué quiere",
+                conversation: [
+                    { type: 'user', text: 'Busco un Toyota Corolla 2023' },
+                    { type: 'bot', text: '¡Excelente elección! Tengo 2 Corolla 2023 disponibles. ¿Prefieres automático o estándar? ⚙️' },
+                    { type: 'user', text: 'Automático' },
+                    { type: 'bot', text: 'Perfecto! Tengo uno blanco y otro gris, ambos con pocas millas:<br>🔹 Blanco: 15,000 millas - $25,800<br>🔹 Gris: 12,000 millas - $26,200' },
+                    { type: 'user', text: '¿El blanco tiene CarPlay?' },
+                    { type: 'bot', text: '¡Sí! Viene con Toyota Safety Sense 2.0, CarPlay, cámara de reversa y garantía extendida hasta 2026.' },
+                    { type: 'user', text: 'Me convence. ¿Puedo verlo hoy?' },
+                    { type: 'bot', text: 'Claro! ¿A qué hora te queda mejor? Tengo disponible desde las 3:00 PM. Solo necesito tu contacto para confirmarte.' },
+                    { type: 'user', text: 'Ana Martínez - 787-555-0198, a las 4 PM' },
+                    { type: 'bot', text: '✅ ¡Cita confirmada Ana! Hoy 4:00 PM para ver el Corolla blanco. Te esperamos! 🎊' }
+                ]
+            },
+            primera_vez: {
+                title: "Comprador primerizo",
+                description: "Cliente que compra su primer auto",
+                conversation: [
+                    { type: 'user', text: 'Es mi primera vez comprando un carro, ¿me pueden ayudar?' },
+                    { type: 'bot', text: '¡Por supuesto! Te voy a guiar paso a paso. Primero, ¿cuál es tu presupuesto aproximado? 🤝' },
+                    { type: 'user', text: 'No estoy seguro, tal vez $200-300 al mes' },
+                    { type: 'bot', text: 'Perfecto! Con ese pago puedes comprar un auto entre $12,000-18,000. ¿Lo vas a usar principalmente para trabajo o familia?' },
+                    { type: 'user', text: 'Para ir al trabajo todos los días' },
+                    { type: 'bot', text: 'Te recomiendo algo económico en gasolina y confiable. ¿Qué te parece un Nissan Sentra o Toyota Corolla?' },
+                    { type: 'user', text: '¿Cuál es más confiable?' },
+                    { type: 'bot', text: 'Ambos son excelentes, pero el Toyota tiene fama de durar 300,000+ millas con buen mantenimiento. ¿Te interesa conocer los documentos que necesitas?' },
+                    { type: 'user', text: 'Sí, por favor' },
+                    { type: 'bot', text: 'Necesitas: licencia, 2 talonarios de pago, carta del banco y comprobante de dirección. ¿Quieres que agendemos una cita para explicarte todo?' },
+                    { type: 'user', text: 'Sí, Luis Pérez - 787-555-0167' },
+                    { type: 'bot', text: '✅ ¡Perfecto Luis! Cita agendada. Te enseñaremos todo el proceso sin presión. ¡PRIMER COMPRADOR CAPTURADO!' }
+                ]
+            },
+            familia: {
+                title: "Familia buscando carro amplio",
+                description: "Familia con niños necesita vehículo espacioso",
+                conversation: [
+                    { type: 'user', text: 'Busco un carro para familia con 3 niños' },
+                    { type: 'bot', text: '¡Entiendo! Necesitas espacio y seguridad. ¿Prefieres SUV, minivan o pickup? 👨‍👩‍👧‍👦' },
+                    { type: 'user', text: 'SUV de 7 asientos' },
+                    { type: 'bot', text: 'Tengo opciones perfectas:<br>🔹 Toyota Highlander 2020 - 8 asientos<br>🔹 Honda Pilot 2019 - 8 asientos<br>🔹 Mazda CX-9 2021 - 7 asientos<br>Todos con excelente calificación de seguridad.' },
+                    { type: 'user', text: '¿Cuál tiene mejor seguridad?' },
+                    { type: 'bot', text: 'El Toyota Highlander tiene 5 estrellas NHTSA y viene con Toyota Safety Sense 2.0: frenado automático, control de crucero adaptativo y más.' },
+                    { type: 'user', text: '¿Puedo verlo con los niños?' },
+                    { type: 'bot', text: '¡Por supuesto! Incluso tenemos área de juegos para que los niños estén cómodos mientras pruebas el auto. ¿Te queda mejor mañana o el sábado?' },
+                    { type: 'user', text: 'Sábado estaría perfecto. Rosa Morales - 939-555-0134' },
+                    { type: 'bot', text: '✅ ¡Cita confirmada Rosa! Sábado 10 AM con área de juegos lista para los niños. ¡FAMILIA LEAD SECURED!' }
+                ]
+            },
+            economico: {
+                title: "Cliente con presupuesto limitado",
+                description: "Buscando la opción más económica",
+                conversation: [
+                    { type: 'user', text: 'Busco el carro más barato que tengan' },
+                    { type: 'bot', text: 'Entiendo que buscas la mejor relación precio-valor. ¿Cuál es tu presupuesto máximo? 💰' },
+                    { type: 'user', text: 'Máximo $8,000' },
+                    { type: 'bot', text: 'Tengo opciones confiables en ese rango:<br>🔹 Nissan Versa 2015 - $7,500<br>🔹 Hyundai Accent 2016 - $7,800<br>🔹 Toyota Yaris 2017 - $7,900<br>Todos con historial limpio.' },
+                    { type: 'user', text: '¿Vienen con garantía?' },
+                    { type: 'bot', text: 'Sí! Todos incluyen garantía de motor y transmisión por 3 meses. El Toyota también tiene garantía extendida disponible.' },
+                    { type: 'user', text: 'Perfecto, ¿puedo financiar $7,500?' },
+                    { type: 'bot', text: 'Claro! Con entrada de $1,500 serían unos $180 mensuales. ¿Te interesa que revise tu pre-aprobación?' },
+                    { type: 'user', text: 'Sí, Miguel Torres - 787-555-0189' },
+                    { type: 'bot', text: '✅ ¡Listo Miguel! Te contacto mañana con tu pre-aprobación. ¡CLIENTE ECONÓMICO CAPTURADO!' }
+                ]
+            },
+            prueba_manejo: {
+                title: "Solicitud de prueba de manejo",
+                description: "Cliente quiere probar antes de decidir",
+                conversation: [
+                    { type: 'user', text: 'Quiero hacer una prueba de manejo' },
+                    { type: 'bot', text: '¡Perfecto! ¿Ya tienes un auto en mente o quieres que te recomiende algo según tus necesidades? 🚙' },
+                    { type: 'user', text: 'Vi un Honda Civic en su página' },
+                    { type: 'bot', text: '¡Excelente! ¿Te refieres al Civic 2022 azul o al 2021 blanco? Ambos están disponibles para prueba.' },
+                    { type: 'user', text: 'El azul 2022' },
+                    { type: 'bot', text: 'Ese está súper popular! Para la prueba necesito verificar que tengas licencia vigente. ¿En qué pueblo vives?' },
+                    { type: 'user', text: 'Bayamón' },
+                    { type: 'bot', text: 'Perfecto! Nuestro dealer en Bayamón tiene el Civic disponible. ¿Te queda mejor entre semana o fin de semana?' },
+                    { type: 'user', text: 'Mañana si pueden' },
+                    { type: 'bot', text: 'Claro! ¿A las 11 AM te queda bien? Solo necesito tu nombre y teléfono para confirmar la cita.' },
+                    { type: 'user', text: 'Pedro Vega - 939-555-0156' },
+                    { type: 'bot', text: '✅ ¡Confirmado Pedro! Mañana 11 AM en Bayamón para probar el Civic azul. ¡PRUEBA AGENDADA!' }
+                ]
+            },
+            fuera_horario: {
+                title: "Cliente contactando fuera de horario",
+                description: "Domingo por la noche - mostrando valor 24/7",
+                conversation: [
+                    { type: 'user', text: 'Hola, ¿están abiertos?' },
+                    { type: 'bot', text: 'Hola! Aunque el dealer está cerrado, yo estoy aquí 24/7 para ayudarte. ¿Qué necesitas? 🌙' },
+                    { type: 'user', text: 'Quería información sobre precios' },
+                    { type: 'bot', text: 'Claro! Puedo darte precios de cualquier auto ahora mismo. ¿Qué tipo de vehículo buscas?' },
+                    { type: 'user', text: 'Un pickup para trabajo' },
+                    { type: 'bot', text: 'Excelente! ¿Para qué tipo de trabajo? Eso me ayuda a recomendarte la capacidad correcta de carga.' },
+                    { type: 'user', text: 'Construcción, necesito cargar materiales' },
+                    { type: 'bot', text: 'Perfecto! Te recomiendo:<br>🔹 Ford F-150 2020 - $32,500<br>🔹 Chevy Silverado 2019 - $29,800<br>🔹 Toyota Tacoma 2021 - $31,200<br>Todos con capacidad heavy-duty.' },
+                    { type: 'user', text: '¿Puedo verlos mañana temprano?' },
+                    { type: 'bot', text: 'Por supuesto! Abrimos a las 8 AM. ¿8:30 AM te queda bien? Tu nombre y teléfono para apartarte la cita.' },
+                    { type: 'user', text: 'José Rivera - 787-555-0173' },
+                    { type: 'bot', text: '✅ ¡Listo José! Cita mañana 8:30 AM para pickups de trabajo. ¡LEAD NOCTURNO CAPTURADO - esto es lo que pierdes sin mí!' }
+                ]
+            }
+        };
+
+        let currentConversation = [];
+        let currentMessageIndex = 0;
+        let isRunning = false;
+
+        function updateScenarioInfo(scenario) {
+            const info = scenarios[scenario];
+            document.getElementById('scenarioInfo').innerHTML = `
+                <h4>Escenario: ${info.title}</h4>
+                <p>${info.description}</p>
+            `;
+        }
 
         function showTypingIndicator() {
             const indicator = document.getElementById('typingIndicator');
@@ -1991,54 +2143,78 @@ VIERNES: Planificar optimizaciones para la próxima semana
             indicator.style.display = 'none';
         }
 
-        function startChatDemo() {
+        function resetChat() {
             const chatDiv = document.getElementById('demoChat');
-            chatDiv.innerHTML = '<div class="chat-message bot-msg"><div class="msg-bubble">¡Hola! ¿Qué auto buscas hoy? 🚗</div></div>';
-            
-            let index = 0;
-            function addMessage() {
-                if (index >= demoConversation.length) return;
-                
-                const msg = demoConversation[index];
-                const messageClass = msg.type === 'bot' ? 'bot-msg' : 'user-msg';
-                
-                // Show typing indicator for bot messages
-                if (msg.type === 'bot') {
-                    showTypingIndicator();
-                    setTimeout(() => {
-                        hideTypingIndicator();
-                        chatDiv.innerHTML += `
-                            <div class="chat-message ${messageClass}">
-                                <div class="msg-bubble">${msg.text}</div>
-                            </div>
-                        `;
-                        chatDiv.scrollTop = chatDiv.scrollHeight;
-                        index++;
-                        addMessage();
-                    }, 1000);
-                } else {
-                    setTimeout(() => {
-                        chatDiv.innerHTML += `
-                            <div class="chat-message ${messageClass}">
-                                <div class="msg-bubble">${msg.text}</div>
-                            </div>
-                        `;
-                        chatDiv.scrollTop = chatDiv.scrollHeight;
-                        index++;
-                        addMessage();
-                    }, 800);
-                }
-            }
-            
-            addMessage();
+            chatDiv.innerHTML = '<div class="chat-message bot-msg"><div class="msg-bubble">¡Hola! Soy tu asistente virtual. ¿Qué auto buscas hoy? 🚗</div></div>';
+            hideTypingIndicator();
         }
 
-        // Auto-start demo after page load
+        function startScenario(scenarioKey) {
+            if (isRunning) return;
+            
+            isRunning = true;
+            const scenario = scenarios[scenarioKey];
+            updateScenarioInfo(scenarioKey);
+            resetChat();
+            
+            currentConversation = scenario.conversation;
+            currentMessageIndex = 0;
+            
+            // Deshabilitar botones temporalmente
+            const buttons = document.querySelectorAll('.demo-btn');
+            buttons.forEach(btn => btn.disabled = true);
+            
+            setTimeout(() => {
+                addNextMessage();
+            }, 1000);
+        }
+
+        function addNextMessage() {
+            if (currentMessageIndex >= currentConversation.length) {
+                // Re-habilitar botones
+                const buttons = document.querySelectorAll('.demo-btn');
+                buttons.forEach(btn => btn.disabled = false);
+                isRunning = false;
+                return;
+            }
+            
+            const msg = currentConversation[currentMessageIndex];
+            const chatDiv = document.getElementById('demoChat');
+            const messageClass = msg.type === 'bot' ? 'bot-msg' : 'user-msg';
+            
+            if (msg.type === 'bot') {
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    chatDiv.innerHTML += `
+                        <div class="chat-message ${messageClass}">
+                            <div class="msg-bubble">${msg.text}</div>
+                        </div>
+                    `;
+                    chatDiv.scrollTop = chatDiv.scrollHeight;
+                    currentMessageIndex++;
+                    setTimeout(addNextMessage, 1500);
+                }, 1200);
+            } else {
+                setTimeout(() => {
+                    chatDiv.innerHTML += `
+                        <div class="chat-message ${messageClass}">
+                            <div class="msg-bubble">${msg.text}</div>
+                        </div>
+                    `;
+                    chatDiv.scrollTop = chatDiv.scrollHeight;
+                    currentMessageIndex++;
+                    setTimeout(addNextMessage, 1000);
+                }, 800);
+            }
+        }
+
+        // Auto-start con escenario SUV después de cargar la página
         setTimeout(() => {
-            startChatDemo();
+            startScenario('suv_usado');
         }, 3000);
 
-        // Intersection Observer for fade-in animations
+        // Intersection Observer para animaciones fade-in
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2047,14 +2223,14 @@ VIERNES: Planificar optimizaciones para la próxima semana
             });
         }, { threshold: 0.1 });
 
-        // Observe all fade-in elements
+        // Observar elementos fade-in
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.fade-in').forEach(el => {
                 observer.observe(el);
             });
         });
 
-        // Smooth scrolling for anchor links
+        // Smooth scrolling para links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -2065,6 +2241,96 @@ VIERNES: Planificar optimizaciones para la próxima semana
                     });
                 }
             });
+        });
+
+        // Agregar más escenarios basados en el JSON
+        scenarios.trabajo_pesado = {
+            title: "Cliente para trabajo pesado",
+            description: "Necesita vehículo para trabajo de construcción",
+            conversation: [
+                { type: 'user', text: 'Necesito un pickup para trabajo pesado' },
+                { type: 'bot', text: '¡Perfecto! ¿Qué tipo de carga vas a transportar? Eso me ayuda a recomendarte la capacidad correcta. 🚛' },
+                { type: 'user', text: 'Materiales de construcción, cemento, bloques' },
+                { type: 'bot', text: 'Necesitas algo robusto! Te recomiendo:<br>🔹 Ford F-250 2019 - Capacidad 3,000 lbs<br>🔹 Chevy Silverado 2500 2020 - Heavy Duty<br>🔹 Ram 2500 2018 - Motor diesel' },
+                { type: 'user', text: 'El Ford me llama la atención' },
+                { type: 'bot', text: 'Excelente elección! El F-250 2019 tiene motor V8, transmisión automática y está en perfectas condiciones. ¿Necesitas financiamiento?' },
+                { type: 'user', text: 'Sí, ¿cuánto sería al mes?' },
+                { type: 'bot', text: 'Con entrada de $5,000 serían aproximadamente $485 mensuales a 60 meses. ¿Te interesa una cita para verlo?' },
+                { type: 'user', text: 'Sí, Ricardo Morales - 787-555-0145' },
+                { type: 'bot', text: '✅ ¡Perfecto Ricardo! Cita agendada para ver el F-250. ¡CONTRACTOR LEAD CAPTURADO!' }
+            ]
+        };
+
+        scenarios.mal_credito = {
+            title: "Cliente con mal crédito",
+            description: "Necesita financiamiento especial",
+            conversation: [
+                { type: 'user', text: 'Tengo mal crédito, ¿me pueden financiar?' },
+                { type: 'bot', text: 'No te preocupes! Trabajamos con bancos que se especializan en segundas oportunidades. ¿Qué score aproximado tienes? 📊' },
+                { type: 'user', text: 'Como 580' },
+                { type: 'bot', text: 'Perfecto! Con 580 puedes calificar. Necesitarás entrada más alta, pero sí es posible. ¿Cuánto puedes dar de inicial?' },
+                { type: 'user', text: '$3,000' },
+                { type: 'bot', text: 'Con $3,000 de entrada puedes financiar hasta $15,000. ¿Buscas algo específico?' },
+                { type: 'user', text: 'Algo confiable para ir al trabajo' },
+                { type: 'bot', text: 'Te recomiendo:<br>🔹 Toyota Corolla 2018 - $270/mes<br>🔹 Nissan Sentra 2019 - $255/mes<br>🔹 Honda Civic 2017 - $265/mes<br>Todos aprobados para tu score.' },
+                { type: 'user', text: 'El Nissan me gusta' },
+                { type: 'bot', text: 'Excelente! Para empezar la pre-aprobación necesito tu nombre y teléfono. El proceso toma 24 horas.' },
+                { type: 'user', text: 'Carmen Vázquez - 939-555-0167' },
+                { type: 'bot', text: '✅ ¡Listo Carmen! Te contactaremos con tu pre-aprobación mañana. ¡SEGUNDA OPORTUNIDAD LEAD!' }
+            ]
+        };
+
+        scenarios.comparacion = {
+            title: "Cliente comparando marcas",
+            description: "Indeciso entre diferentes opciones",
+            conversation: [
+                { type: 'user', text: '¿Qué es mejor, Toyota Corolla o Honda Civic?' },
+                { type: 'bot', text: 'Ambos son excelentes! Te explico las diferencias:<br>🔹 Corolla: Más económico en mantenimiento<br>🔹 Civic: Más deportivo y potente<br>¿Qué es más importante para ti? 🤔' },
+                { type: 'user', text: 'Que sea económico y dure mucho' },
+                { type: 'bot', text: 'Entonces el Corolla es tu mejor opción! Toyota tiene fama de durar 300,000+ millas y las piezas son más baratas.' },
+                { type: 'user', text: '¿Tienen alguno disponible?' },
+                { type: 'bot', text: 'Sí! Tengo 3 Corollas:<br>🔹 2021 - $23,500 (15k millas)<br>🔹 2020 - $21,800 (25k millas)<br>🔹 2019 - $19,500 (35k millas)' },
+                { type: 'user', text: 'El 2020 me interesa' },
+                { type: 'bot', text: '¡Excelente elección! Ese tiene mantenimientos al día y garantía hasta 2025. ¿Quieres agendarme una cita para verlo?' },
+                { type: 'user', text: 'Sí, Sofía Martín - 787-555-0198' },
+                { type: 'bot', text: '✅ ¡Perfecto Sofía! Cita para ver el Corolla 2020. ¡CLIENTE DECIDIDO CAPTURADO!' }
+            ]
+        };
+
+        scenarios.intercambio = {
+            title: "Cliente con trade-in",
+            description: "Quiere intercambiar su auto actual",
+            conversation: [
+                { type: 'user', text: 'Quiero cambiar mi auto por uno más nuevo' },
+                { type: 'bot', text: '¡Perfecto! El trade-in puede ayudarte mucho con la entrada. ¿Qué auto tienes actualmente? 🔄' },
+                { type: 'user', text: 'Honda Accord 2015' },
+                { type: 'bot', text: 'El Accord 2015 tiene buen valor! ¿Cuántas millas tiene y está al día con mantenimiento?' },
+                { type: 'user', text: '85,000 millas, mantenimiento al día' },
+                { type: 'bot', text: 'Excelente! Ese Accord puede valer entre $12,000-14,000 dependiendo de la condición. ¿Qué auto nuevo te interesa?' },
+                { type: 'user', text: 'Algo más grande, tal vez un SUV' },
+                { type: 'bot', text: 'Con tu trade-in podrías conseguir:<br>🔹 Honda CR-V 2022 - Tu Accord + $8,000<br>🔹 Toyota RAV4 2021 - Tu Accord + $6,500<br>🔹 Mazda CX-5 2023 - Tu Accord + $9,200' },
+                { type: 'user', text: 'El RAV4 suena bien' },
+                { type: 'bot', text: '¡Perfecto! Para evaluar exactamente tu Accord y hacer números reales, ¿puedes venir para que lo inspeccione?' },
+                { type: 'user', text: 'Claro, Roberto Díaz - 939-555-0134' },
+                { type: 'bot', text: '✅ ¡Excelente Roberto! Cita para evaluación + test drive del RAV4. ¡TRADE-IN LEAD SECURED!' }
+            ]
+        };
+
+        // Agregar los nuevos escenarios a la interfaz
+        function addMoreScenarioButtons() {
+            const controlsDiv = document.querySelector('.demo-controls');
+            const additionalButtons = `
+                <button class="demo-btn small" onclick="startScenario('trabajo_pesado')">🚛 Trabajo Pesado</button>
+                <button class="demo-btn small" onclick="startScenario('mal_credito')">📊 Mal Crédito</button>
+                <button class="demo-btn small" onclick="startScenario('comparacion')">⚖️ Comparación</button>
+                <button class="demo-btn small" onclick="startScenario('intercambio')">🔄 Trade-in</button>
+            `;
+            controlsDiv.innerHTML += additionalButtons;
+        }
+
+        // Inicializar cuando cargue la página
+        document.addEventListener('DOMContentLoaded', () => {
+            addMoreScenarioButtons();
         });
     </script>
 </body>
